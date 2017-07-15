@@ -3,6 +3,7 @@ import (
 	"github.com/go-redis/redis"
 	"crypto/md5"
 	"encoding/hex"
+	"encoding/base64"
 )
 var store = redis.NewClient(&redis.Options{
 	Addr:     "localhost:6379",
@@ -32,6 +33,7 @@ func FindLongUrl(shortUrl string ) string {
 func GenerateUrl(url string) string {
 	hash := md5.New()
 	hash.Write([]byte(url))
-	shortUrl:=hex.EncodeToString(hash.Sum(nil))[0:8]
-	return  shortUrl
+	shortUrl:=hex.EncodeToString(hash.Sum(nil))
+	encode:=base64.URLEncoding.EncodeToString([]byte(shortUrl))[0:8]
+	return  encode
 }

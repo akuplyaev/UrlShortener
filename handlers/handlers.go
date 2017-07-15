@@ -10,7 +10,7 @@ import (
 func AddShortUrl (resp http.ResponseWriter,request *http.Request){
 	params:=request.URL.Query()
 	longUrl:=params.Get("url")
-	if longUrl == "" {  //придумать как проверить этот url на корекктность
+	if longUrl == "" {  //придумать как проверить этот url на корректность
 		http.Error(resp, "Bad Request", http.StatusBadRequest)
 		return
 	}
